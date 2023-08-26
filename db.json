@@ -1,0 +1,28 @@
+{
+  "users": [
+    {
+      "id": 0,
+      "fullname": "Jack",
+      "phno": 9999999999,
+      "address": "HNO1",
+      "email": "jack@gmail.com",
+      "password": "jack"
+    },
+    {
+      "id": 1,
+      "fullname": "John",
+      "phno": 8888888888,
+      "address": "HNO2",
+      "email": "john@gmail.com",
+      "password": "john"
+    },
+    {
+      "id": 2,
+      "fullname": "Jim",
+      "phno": 345345345,
+      "address": "HNO3",
+      "email": "jim@gmail.com",
+      "password": "jim"
+    }
+  ]
+}
