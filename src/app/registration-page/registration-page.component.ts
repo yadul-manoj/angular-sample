@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormControlName, Validators } from '@angular/forms'
-import { HttpClient } from '@angular/common/http'
 import { ToastrService } from 'ngx-toastr';
+import { RegisterService } from './register.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registration-page',
@@ -12,7 +13,7 @@ export class RegistrationPageComponent implements OnInit {
   result: any = []
   userID: number = 2;
 
-  constructor(private http: HttpClient, private toastr: ToastrService) { }
+  constructor(private toastr: ToastrService, private registerService: RegisterService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -26,24 +27,16 @@ export class RegistrationPageComponent implements OnInit {
   })
 
   registerUser() {
-    console.log(this.registrationForm.value)
-    const body = {
-      "id": this.userID,
-      "fullname": this.registrationForm.value['fullname'],
-      "phno": this.registrationForm.value['phno'],
-      "address": this.registrationForm.value['address'],
-      "email": this.registrationForm.value['email'],
-      "password": this.registrationForm.value['password']
-    };
-    // this.http.post('http://localhost:3000/users', body).subscribe(
-    //   data => {
-    //     console.log('POST Request is successful ', data);
-    //   },
-    //   error => {
-    //     console.log('Error', error);
-    //   }
-    // );
-    this.toastr.success('Registration successful.');
-    this.userID++
+    this.registrationForm.value['id'] = this.userID
+    let flag = this.registerService.getUsers(this.registrationForm.value)
+    console.log('ok', flag)
+    if (flag) {
+      this.toastr.success('Registration successful.');
+      this.userID++
+      this.router.navigate(['/home']);
+    }
+    else {
+      this.toastr.error('Registration fail.')
+    }
   }
 }

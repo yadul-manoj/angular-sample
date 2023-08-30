@@ -15,14 +15,6 @@
       "address": "HNO2",
       "email": "john@gmail.com",
       "password": "john"
-    },
-    {
-      "id": 2,
-      "fullname": "Jim",
-      "phno": 345345345,
-      "address": "HNO3",
-      "email": "jim@gmail.com",
-      "password": "jim"
     }
   ]
 }

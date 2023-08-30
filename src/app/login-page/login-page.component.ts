@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormControlName, Validators } from '@angular/forms'
 import { HttpClient } from '@angular/common/http'
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
+import { LoginService } from './login.service';
 
 @Component({
   selector: 'app-login-page',
@@ -11,12 +13,16 @@ import { ToastrService } from 'ngx-toastr';
 export class LoginPageComponent implements OnInit {
   result: any = []
 
-  constructor(private http: HttpClient, private toastr: ToastrService) { }
+  constructor(private http: HttpClient, private toastr: ToastrService, private router: Router) { }
+  // constructor(private http: HttpClient, private toastr: ToastrService, private router: Router, private loginService: LoginService) { }
 
-  ngOnInit(): void {
-    this.http.get('http://localhost:3000/users').subscribe(result => { 
+  async ngOnInit(): Promise<void> {
+    this.http.get('http://localhost:3000/users').subscribe(result => {
       this.result = result
     })
+    // this.result = this.loginService.loginUser()
+    // await new Promise(f => setTimeout(f, 1000));
+    // console.log(this.result)
   }
 
   loginForm = new FormGroup({
@@ -32,7 +38,7 @@ export class LoginPageComponent implements OnInit {
         console.log(i, 'Login success.')
         flag = true
         this.toastr.success('Login success.');
-        break 
+        break
       }
     }
 
@@ -40,5 +46,7 @@ export class LoginPageComponent implements OnInit {
       console.log('Login fail.')
       this.toastr.error('Login fail.');
     }
+    else
+      this.router.navigate(['/home']);
   }
 }
