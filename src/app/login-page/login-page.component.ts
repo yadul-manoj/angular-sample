@@ -18,6 +18,7 @@ export class LoginPageComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.http.get('http://localhost:3000/users').subscribe(result => {
+      console.log(result)
       this.result = result
     })
     // this.result = this.loginService.loginUser()
@@ -26,7 +27,7 @@ export class LoginPageComponent implements OnInit {
   }
 
   loginForm = new FormGroup({
-    email: new FormControl('', [Validators.required]),
+    email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required])
   })
 
@@ -48,5 +49,13 @@ export class LoginPageComponent implements OnInit {
     }
     else
       this.router.navigate(['/home']);
+  }
+
+  get email() {
+    return this.loginForm.get('email')
+  }
+ 
+  get password() {
+    return this.loginForm.get('password')
   }
 }

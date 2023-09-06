@@ -23,4 +23,21 @@ export class RegisterService {
         await new Promise(f => setTimeout(f, 1000));
         return flag
     }
+
+
+    // getUsers(registrationForm: FormGroup): boolean {
+    //     let flag: boolean
+    //     this.http.post('http://localhost:3000/users', registrationForm).subscribe(
+    //         data => {
+    //             console.log('POST Request is successful ', data);
+    //             flag = true
+    //         },
+    //         error => {
+    //             console.log('Error', error);
+    //             flag = false
+    //         }
+    //     );
+    //     setTimeout(() => {}, 1000);
+    //     return flag
+    // }
 }
